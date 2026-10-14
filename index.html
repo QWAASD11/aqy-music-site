@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿奇音符 · AI 定制歌曲 | 把你想说的话写成一首歌</title>
+<meta name="description" content="用阿奇AI为你写词作曲，生日歌、表白歌、道歉歌、毕业歌、婚礼歌全风格定制。20元起，按下单顺序交付。">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&amp;family=Noto+Sans+SC:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">♪</span>
+      <span class="logo-text"><b>阿奇音符</b><i>AI 定制歌曲</i></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#styles">歌曲类型</a>
+      <a href="#listen">试听</a>
+      <a href="#price">价格</a>
+      <a href="#flow">流程</a>
+      <a href="#delivery">交付</a>
+      <a href="#service">客服</a>
+      <a href="#rules">规矩</a>
+      <a href="#faq">问答</a>
+    </nav>
+    <div class="nav-acts">
+      <button class="cart-btn" id="cartBtn" aria-label="购物车">
+        <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.4 12.2a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.3L21 7H6"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <a href="#order" class="btn-call">立即定制</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg"><img src="assets/img/hero.png" alt="音乐制作"><div class="hero-mask"></div></div>
+  <div class="hero-inner">
+    <span class="hero-tag">A I 定 制 歌 曲 · 专 属 于 你</span>
+    <h1 class="hero-h1">把你想说的话<br><em>写成一首歌</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-p">生日、表白、道歉、道谢、毕业、婚礼<br>只要你给一个故事，阿奇AI还你一首专属的歌</p>
+    <div class="hero-btns">
+      <a href="#order" class="btn btn-gold">立即下单定制</a>
+      <a href="#listen" class="btn btn-ghost">先听听样品</a>
+    </div>
+    <div class="hero-stats">
+      <div><b>¥20<span>起</span></b><i>最低价格</i></div>
+      <div><b>按<span>顺序</span></b><i>下单即做</i></div>
+      <div><b>全<span>风格</span></b><i>你想要都有</i></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span></span>向下浏览</div>
+</section>
+
+<section class="sec">
+  <div class="sec-head">
+    <span class="sec-label">为 什 么 选 阿 奇 音 符</span>
+    <h2 class="sec-h2">一首歌，<br>装下你想说的话</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-num">01</div><h3>不用你会写词</h3>
+      <p>你只要把想说的话、想讲的故事告诉我，阿奇AI帮你写成歌词。说人话就行，不用文绉绉。</p></div>
+    <div class="why-card"><div class="why-num">02</div><h3>风格随你挑</h3>
+      <p>流行、民谣、R&B、说唱、古风、儿歌……你喜欢的风格都能做。也可以先听样品再决定。</p></div>
+    <div class="why-card"><div class="why-num">03</div><h3>按顺序交付</h3>
+      <p>下单后按下单先后顺序制作。通常 30 分钟内出，高峰期会告知预计时间——急用可以选加急。</p></div>
+    <div class="why-card"><div class="why-num">04</div><h3>20 元就能试</h3>
+      <p>不用花大几百。20 元起步，不满意可以改。先花小钱看看效果，合适再做精装版。</p></div>
+  </div>
+</section>
+
+<section class="sec sec-dark" id="styles">
+  <div class="sec-head light">
+    <span class="sec-label">歌 曲 类 型</span>
+    <h2 class="sec-h2">你想送谁？<br>什么场合？</h2>
+    <p class="sec-p">以下是最常见的场景，如果你要的没在这里，选「自定义」告诉我就行。</p>
+  </div>
+  <div class="style-grid" id="styleGrid"></div>
+</section>
+
+<section class="sec sec-warm" id="listen">
+  <div class="sec-head">
+    <span class="sec-label">样 品 试 听</span>
+    <h2 class="sec-h2">先听听<br>我们做出来的歌</h2>
+    <p class="sec-p">下面是做过的作品片段。听一下风格是不是你想要的，再决定下单。</p>
+  </div>
+  <div class="listen-grid" id="listenGrid"></div>
+  <p class="listen-note">※ 以上为作品示意。实际交付为根据你提供的故事定制的原创歌曲。</p>
+</section>
+
+<section class="sec" id="price">
+  <div class="sec-head">
+    <span class="sec-label">价 格 与 版 本</span>
+    <h2 class="sec-h2">明码标价<br>不用问来问去</h2>
+    <p class="sec-p">价格按版本和制作难度定。不确定选哪个？先下单基础版试试，满意再升级。</p>
+  </div>
+  <div class="price-grid" id="priceGrid"></div>
+  <p class="price-note">
+    ※ 以上为参考价格，特殊要求（超长时长、多声部、特定歌手音色）可能另议<br>
+    ※ 下单后按下单顺序交付，通常 30 分钟内（工作日 9:00-22:00）<br>
+    ※ 基础版含 1 次修改，标准版含 2 次，精品版含 3 次
+  </p>
+</section>
+
+<section class="sec sec-dark" id="flow">
+  <div class="sec-head light">
+    <span class="sec-label">下 单 流 程</span>
+    <h2 class="sec-h2">四步，<br>拿到属于你的歌</h2>
+  </div>
+  <div class="flow-grid">
+    <div class="flow-step"><div class="fs-num">1</div><h3>下单填写</h3>
+      <p>选歌曲类型和版本，填上：送给谁、什么场合、想说的话、有没有特别的故事。</p></div>
+    <div class="flow-step"><div class="fs-num">2</div><h3>付款确认</h3>
+      <p>扫码付款后截图发我，或者直接加微信沟通。确认后开始制作。</p></div>
+    <div class="flow-step"><div class="fs-num">3</div><h3>AI 写词作曲</h3>
+      <p>阿奇AI根据你的故事生成歌词和旋律，我也人工把关，确保不是机器味。</p></div>
+    <div class="flow-step"><div class="fs-num">4</div><h3>交付给你</h3>
+      <p>按下单顺序制作完成后，把成品发你（音频文件 + 歌词）。不满意可以在版本范围内修改。</p></div>
+  </div>
+</section>
+
+<section class="sec sec-warm" id="delivery">
+  <div class="sec-head">
+    <span class="sec-label">交 付 说 明</span>
+    <h2 class="sec-h2">下单后，<br>什么时候能拿到歌？</h2>
+  </div>
+  <div class="deliver-grid">
+    <div class="deliver-card"><div class="dc-icon">⚡</div><h3>按下单顺序制作</h3>
+      <p>订单按下单先后排队，先下单先制作。不插队，公平对待每一位客户。</p></div>
+    <div class="deliver-card"><div class="dc-icon">⏱</div><h3>通常 30 分钟内</h3>
+      <p>大多数订单 30 分钟内可交付。高峰期会排队，下单时我会告知预计时间。</p></div>
+    <div class="deliver-card"><div class="dc-icon">🚀</div><h3>加急可插队</h3>
+      <p>急用的话选「加急优先」，优先制作、15 分钟内交付（标准版 +30 元，或直接选加急版）。</p></div>
+    <div class="deliver-card"><div class="dc-icon">🕐</div><h3>接单时间</h3>
+      <p>工作日 09:00 — 22:00。此时间段外下单，会在次日工作时间优先处理。</p></div>
+  </div>
+  <div class="contact-ways">
+    <h3>三种方式，随你选</h3>
+    <div class="cw-grid">
+      <a class="cw-card" href="#order"><span class="cw-icon">📝</span><b>在线下单</b><i>填好需求提交，我会尽快联系你</i></a>
+      <a class="cw-card" href="tel:18723308413"><span class="cw-icon">📞</span><b>电话下单</b><i>187 2330 8413 · 点击直拨</i></a>
+      <div class="cw-card"><span class="cw-icon">💬</span><b>微信下单</b><i>加微信沟通，发需求更方便</i></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="order">
+  <div class="sec-head">
+    <span class="sec-label">立 即 定 制</span>
+    <h2 class="sec-h2">填写你的故事<br>剩下的交给我</h2>
+    <p class="sec-p">填得越具体，歌写得越贴你的心意。不用写得好，说人话就行。</p>
+  </div>
+  <div class="order-wrap">
+    <form class="order-form" id="orderForm">
+      <div class="of-row"><label>歌曲类型 *</label><select id="fType" required=""></select></div>
+      <div class="of-row"><label>选择版本 *</label><select id="fPlan" required=""></select></div>
+      <div class="of-row half">
+        <div><label>送给谁 *</label><input type="text" id="fTo" placeholder="例如：妈妈 / 女朋友 / 好兄弟" required=""></div>
+        <div><label>你的称呼 *</label><input type="text" id="fFrom" placeholder="例如：小王" required=""></div>
+      </div>
+      <div class="of-row"><label>什么场合 / 什么事 *</label>
+        <input type="text" id="fScene" placeholder="例如：妈妈50岁生日，想感谢她这些年的付出" required=""></div>
+      <div class="of-row"><label>想对他/她说的话 *</label>
+        <textarea id="fWords" rows="4" placeholder="把你想说的都写下来，越具体越好。比如：
+妈，谢谢你这些年为我们做的一切。
+你总是把最好的留给我，自己舍不得。" required=""></textarea></div>
+      <div class="of-row"><label>有没有特别的故事？（选填，但写了会更打动人）</label>
+        <textarea id="fStory" rows="3" placeholder="例如：小时候她每天凌晨起来给我做早饭，冬天手都冻裂了……"></textarea></div>
+      <div class="of-row half">
+        <div><label>风格偏好</label><select id="fStyle"></select></div>
+        <div><label>是否加急</label>
+          <select id="fRush">
+            <option value="">不加急（按顺序排队）</option>
+            <option value="加急">加急优先（+30元）</option>
+          </select></div>
+      </div>
+      <div class="of-row half">
+        <div><label>联系电话 *</label><input type="tel" id="fPhone" placeholder="方便交付时联系" required=""></div>
+        <div><label>微信号（选填）</label><input type="text" id="fWx" placeholder="方便发成品给你"></div>
+      </div>
+      <div class="of-summary">
+        <div><span>当前选择</span><b id="sumText">—</b></div>
+        <div class="of-total"><span>合计</span><b id="sumPrice">¥0</b></div>
+      </div>
+      <button type="submit" class="btn btn-gold btn-full">提交订单</button>
+      <p class="of-tip">提交后我会尽快联系你确认。也可以直接打电话。</p>
+    </form>
+    <aside class="order-side">
+      <div class="os-card">
+        <h3>直接联系我</h3>
+        <a class="os-row" href="tel:18723308413"><span class="os-icon">📞</span><div><b>187 2330 8413</b><i>点一下直接拨</i></div></a>
+        <div class="os-row"><span class="os-icon">🕐</span><div><b>09:00 — 22:00</b><i>接单时间 · 按下单顺序交付</i></div></div>
+        <div class="os-row"><span class="os-icon">⚡</span><div><b>加急通道</b><i>急用可以优先安排</i></div></div>
+        <div class="os-qr"><img src="assets/img/qr_tel.png" alt="扫码拨号"><span>扫码直接拨打</span></div>
+      </div>
+      <div class="os-card">
+        <h3>下单前先看看</h3>
+        <ul class="os-list">
+          <li>告诉我送给谁、什么场合</li>
+          <li>把想说的话写得越具体越好</li>
+          <li>有真实故事的话一定要写</li>
+          <li>不确定风格？我可以推荐</li>
+          <li>不满意可以在版本范围内改</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="sec sec-dark" id="service">
+  <div class="sec-head light">
+    <span class="sec-label">客 服 中 心</span>
+    <h2 class="sec-h2">有问题？<br>三种方式找我</h2>
+    <p class="sec-p">下单前想问清楚、交付后要修改、或者就单纯想聊聊——都可以。</p>
+  </div>
+  <div class="service-grid">
+    <a class="service-card" href="tel:18723308413"><div class="sc-icon">📞</div><h3>打电话</h3>
+      <p class="sc-main">187 2330 8413</p><p class="sc-sub">点一下直接拨，最快的方式</p></a>
+    <a class="service-card" href="#order"><div class="sc-icon">💬</div><h3>微信咨询</h3>
+      <p class="sc-main">加微信沟通</p><p class="sc-sub">发需求、发素材都方便</p></a>
+    <a class="service-card" href="#order"><div class="sc-icon">📝</div><h3>在线留言</h3>
+      <p class="sc-main">填表提交需求</p><p class="sc-sub">我会尽快联系你</p></a>
+  </div>
+  <div class="service-hours">
+    <span class="sh-dot"></span><b>接单时间</b>　工作日 09:00 — 22:00　｜　其余时段下单，次日优先处理
+  </div>
+</section>
+
+<section class="sec sec-warm" id="rules">
+  <div class="sec-head">
+    <span class="sec-label">本 店 规 矩</span>
+    <h2 class="sec-h2">丑话说在前头，<br>这样大家都省事 😄</h2>
+    <p class="sec-p">不是态度不好，是想把时间都花在把歌做好上。请先看完再下单～</p>
+  </div>
+  <div class="rule-grid">
+    <div class="rule-card"><div class="rc-emoji">💸</div><h3>不议价</h3>
+      <p class="rc-line">价格就写在上面，20 元起。</p>
+      <p class="rc-joke">「能不能便宜点？」<br>—— 能啊，你少买一杯奶茶就够了 🧋</p>
+      <p class="rc-note">明码标价，童叟无欺。砍价的功夫，够我写半首歌词了。</p></div>
+    <div class="rule-card"><div class="rc-emoji">🔪</div><h3>不砍价</h3>
+      <p class="rc-line">一次买断，不搞套路价。</p>
+      <p class="rc-joke">「别人家才 9 块 9！」<br>—— 那您先去别人家看看 👀</p>
+      <p class="rc-note">我们不做"原价999现价9块9"。报的就是实价，没有虚的。</p></div>
+    <div class="rule-card"><div class="rc-emoji">🎁</div><h3>不退款</h3>
+      <p class="rc-line">定制服务，开工即产生成本。</p>
+      <p class="rc-joke">「我不想要了能退吗？」<br>—— 歌都写好了，它也很委屈 🎵</p>
+      <p class="rc-note">但请放心：不满意可以在版本范围内免费修改。这是我们对质量的承诺。</p></div>
+  </div>
+  <div class="rule-promise">
+    <h3>那我们的承诺是什么？</h3>
+    <div class="rp-list">
+      <div class="rp-item"><span>✓</span>歌词不满意，改到你说"对，就是这个感觉"</div>
+      <div class="rp-item"><span>✓</span>风格不对，重做（在修改次数内）</div>
+      <div class="rp-item"><span>✓</span>交付前我自己先听三遍，不过关不发你</div>
+      <div class="rp-item"><span>✓</span>不玩虚的，不套模板，每首歌都是为一个人写的</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="payment">
+  <div class="sec-head">
+    <span class="sec-label">付 款 方 式</span>
+    <h2 class="sec-h2">三种方式，<br>随你方便</h2>
+    <p class="sec-p">确认需求后再付款。付完截图发我，就开始做。</p>
+  </div>
+  <div class="pay-grid">
+    <div class="pay-card">
+      <div class="pay-head"><span class="pay-icon">💚</span><b>微信收款</b></div>
+      <div class="pay-qr-wrap">
+        <img src="assets/img/pay-wechat.png" alt="微信收款码">
+        <div class="pay-ph"><span>📱</span><b>微信收款码</b><i>assets/img/pay-wechat.png</i></div>
+      </div>
+      <p class="pay-tip">扫码付款 · 微信转账</p>
+    </div>
+    <div class="pay-card">
+      <div class="pay-head"><span class="pay-icon">💙</span><b>支付宝收款</b></div>
+      <div class="pay-qr-wrap">
+        <img src="assets/img/pay-alipay.png" alt="支付宝收款码">
+        <div class="pay-ph"><span>📱</span><b>支付宝收款码</b><i>assets/img/pay-alipay.png</i></div>
+      </div>
+      <p class="pay-tip">扫码付款 · 支付宝转账</p>
+    </div>
+    <div class="pay-card ark-card" id="arkPayCard">
+      <div class="pay-head"><span class="pay-icon">🪙</span><b>ARK 收款</b></div>
+      <div class="pay-qr-wrap">
+        <img src="assets/img/pay-ark.png" alt="ARK 收款码" id="arkQrImg">
+        <div class="pay-ph" id="arkQrPh"><span>🪙</span><b>ARK 钱包收款码</b><i>assets/img/pay-ark.png</i></div>
+      </div>
+      <p class="pay-tip">支持 ARK / USDT 等加密资产</p>
+      <div class="ark-info" id="arkInfo">
+        <div class="ark-row"><span class="ark-label">网络</span><b id="arkChain">BSC（BNB Chain）</b></div>
+        <div class="ark-row"><span class="ark-label">币种</span><b id="arkCoin">ARK</b></div>
+        <div class="ark-addr-box">
+          <div class="ark-addr-label">收款地址</div>
+          <div class="ark-addr" id="arkAddr">加载中…</div>
+          <button class="ark-copy" id="arkCopy" type="button">复制</button>
+        </div>
+        <div class="ark-rate" id="arkRate" style="display:none"><span>参考汇率</span><b id="arkRateText">—</b></div>
+      </div>
+      <p class="pay-tip ark-warn">
+        ※ 加密转账请务必核对地址与网络<br>
+        ※ 转账后请提供交易哈希（TxID）方便核对
+      </p>
+    </div>
+  </div>
+  <p class="pay-note">
+    ※ 付款前请先确认需求与价格，付完截图发我即可开始制作<br>
+    ※ 定制服务开工后不支持退款，请确认后再付款<br>
+    ※ 加密资产支付按付款时市价折算
+  </p>
+</section>
+
+<section class="sec sec-warm" id="faq">
+  <div class="sec-head"><span class="sec-label">常 见 问 题</span><h2 class="sec-h2">你可能想问的</h2></div>
+  <div class="faq-wrap" id="faqList"></div>
+</section>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div>
+      <div class="f-logo">♪ 阿 奇 音 符</div>
+      <p class="f-desc">用阿奇AI为你写词作曲，把想说的话唱出来。<br>生日、表白、道歉、道谢、毕业、婚礼——全场景定制。</p>
+    </div>
+    <div class="f-col">
+      <b>联系</b>
+      <a href="tel:18723308413">187 2330 8413</a>
+      <span>工作日 09:00 — 22:00</span>
+      <span>按下单顺序交付</span>
+    </div>
+    <div class="f-col">
+      <b>快捷</b>
+      <a href="#styles">歌曲类型</a><a href="#listen">样品试听</a>
+      <a href="#price">价格版本</a><a href="#rules">本店规矩</a>
+      <a href="#payment">付款方式</a><a href="admin.html" class="admin-link">订单后台</a>
+    </div>
+  </div>
+  <div class="f-bar">
+    <span>© 2026 阿奇音符 · AI 定制歌曲</span>
+    <span>本服务为个性化定制，交付后不支持退款</span>
+  </div>
+</footer>
+
+<div class="drawer-mask" id="drawerMask"></div>
+<aside class="drawer" id="cartDrawer">
+  <div class="drawer-head"><b>我的定制清单</b><button class="drawer-close" id="drawerClose">✕</button></div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="cartFoot" style="display:none">
+    <div class="cart-total"><span>合计</span><b id="cartTotal">¥0</b></div>
+    <form class="order-form" id="quickForm">
+      <input type="text" id="qcName" placeholder="你的称呼 *" required="">
+      <input type="tel" id="qcPhone" placeholder="联系电话 *" required="">
+      <textarea id="qcNote" rows="2" placeholder="简单说下要送给谁、什么场合"></textarea>
+      <button type="submit" class="btn btn-gold btn-full">提交订单</button>
+    </form>
+  </div>
+</aside>
+
+<div class="modal-mask" id="modalMask">
+  <div class="modal">
+    <div class="modal-icon">✓</div>
+    <h3>订单已提交</h3>
+    <p class="modal-order">订单号：<b id="modalOrderNo">—</b></p>
+    <p class="modal-p">我会尽快联系你确认细节。<br>也可以直接拨打：</p>
+    <a href="tel:18723308413" class="btn btn-gold btn-full">187 2330 8413</a>
+    <div class="modal-pay">
+      <p>如需现在付款，可扫下方收款码</p>
+      <div class="pay-qr-box"><img src="assets/img/pay-wechat.png" alt="收款码"></div>
+    </div>
+    <button class="modal-close" id="modalClose">关闭</button>
+  </div>
+</div>
+
+<div class="bgm" id="bgm">
+  <button class="bgm-toggle" id="bgmToggle" aria-label="背景音乐">
+    <span class="bgm-note">♪</span>
+    <span class="bgm-bars"><i></i><i></i><i></i><i></i></span>
+    <span class="bgm-hint" id="bgmHint">点我听</span>
+  </button>
+  <div class="bgm-panel" id="bgmPanel">
+    <div class="bgm-head"><b>背景音乐</b><button id="bgmClose" aria-label="收起">✕</button></div>
+    <div class="bgm-now">
+      <div class="bgm-disc" id="bgmDisc">♪</div>
+      <div class="bgm-meta"><b id="bgmTitle">暂无音乐</b><i id="bgmState">请把 mp3 放入 assets/audio/</i></div>
+    </div>
+    <div class="bgm-progress">
+      <span id="bgmCur">0:00</span>
+      <div class="bgm-bar" id="bgmBar"><i id="bgmFill"></i></div>
+      <span id="bgmDur">0:00</span>
+    </div>
+    <div class="bgm-ctrl">
+      <button id="bgmPrev" aria-label="上一首">⏮</button>
+      <button id="bgmPlay" class="bgm-play" aria-label="播放">▶</button>
+      <button id="bgmNext" aria-label="下一首">⏭</button>
+    </div>
+    <div class="bgm-vol"><span>🔉</span><input type="range" id="bgmVol" min="0" max="100" value="45" aria-label="音量"></div>
+    <div class="bgm-list" id="bgmList"></div>
+  </div>
+  <audio id="bgmAudio" preload="none"></audio>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"f2489ebe01314da28c23ab168a907101","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
+
+

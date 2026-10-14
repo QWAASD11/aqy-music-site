@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>订单后台 · 阿奇音符</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--deep:#171426;--deep2:#221d3a;--gold:#c9a227;--gold-l:#e0be4d;--gold-d:#a8851a;--warm:#faf8f5;--cream:#f3f0ea;--grey:#8a8478;--line:rgba(201,162,39,.22)}
+body{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;background:var(--cream);color:#1a1a1a;line-height:1.7}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,select{font-family:inherit;font-size:14px}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(140deg,#171426,#221d3a,#2e2650);padding:24px}
+.login-box{background:var(--warm);border-radius:8px;padding:48px 42px;width:min(400px,100%);box-shadow:0 24px 70px rgba(0,0,0,.4);text-align:center}
+.login-mark{width:64px;height:64px;background:linear-gradient(135deg,var(--gold),var(--gold-d));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:28px}
+.login-box h1{font-size:23px;color:var(--deep);margin-bottom:8px;font-weight:800}
+.login-box p{font-size:13px;color:var(--grey);margin-bottom:30px}
+.login-box input{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:5px;outline:none;background:#fff;text-align:center;font-size:15px;letter-spacing:.3em}
+.login-box input:focus{border-color:var(--gold)}
+.login-box button{width:100%;margin-top:16px;padding:14px;background:var(--deep);color:#fff;border-radius:5px;font-size:15px;font-weight:600;transition:.26s}
+.login-box button:hover{background:var(--gold)}
+.login-err{color:#c0392b;font-size:13px;margin-top:14px;min-height:20px}
+.login-tip{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--grey);line-height:1.9;text-align:left}
+.login-tip code{background:rgba(201,162,39,.13);padding:2px 7px;border-radius:3px;color:var(--gold-d)}
+.admin{display:none}.admin.on{display:block}
+.topbar{background:var(--deep);color:#fff;padding:0 6vw;height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px;position:sticky;top:0;z-index:100}
+.tb-left{display:flex;align-items:center;gap:14px}
+.tb-mark{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),var(--gold-d));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
+.tb-left b{font-size:17px;font-weight:700}
+.tb-left i{font-style:normal;font-size:11.5px;color:rgba(255,255,255,.5);display:block}
+.tb-right{display:flex;gap:10px;flex-wrap:wrap}
+.tb-btn{padding:9px 18px;border-radius:5px;font-size:13.5px;font-weight:600;color:#fff;border:1px solid rgba(255,255,255,.3);transition:.24s}
+.tb-btn:hover{background:rgba(255,255,255,.12)}
+.tb-btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold-d));border-color:transparent}
+.wrap{max-width:1500px;margin:0 auto;padding:34px 6vw 80px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:30px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:8px;padding:24px;position:relative;overflow:hidden}
+.stat::after{content:'';position:absolute;right:-24px;top:-24px;width:80px;height:80px;border:1px solid rgba(201,162,39,.14);border-radius:50%}
+.stat i{font-style:normal;font-size:12px;color:var(--grey);letter-spacing:.16em;display:block;margin-bottom:10px;font-weight:600}
+.stat b{font-size:32px;font-weight:900;color:var(--deep);display:block;line-height:1.15}
+.stat b em{font-style:normal;font-size:15px;color:var(--gold-d);margin-left:3px}
+.stat small{font-size:12px;color:#a89880;display:block;margin-top:8px}
+.toolbar{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin-bottom:20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.toolbar input,.toolbar select{padding:10px 14px;border:1px solid var(--line);border-radius:5px;outline:none;background:var(--warm);min-width:150px}
+.toolbar input:focus,.toolbar select:focus{border-color:var(--gold);background:#fff}
+.toolbar input.search{flex:1;min-width:220px}
+.spacer{flex:1}
+.tbtn{padding:10px 20px;border-radius:5px;font-size:13.5px;font-weight:600;transition:.24s}
+.tbtn.ghost{border:1px solid var(--line);color:#6a6257;background:#fff}
+.tbtn.ghost:hover{border-color:var(--gold);color:var(--gold-d)}
+.table-card{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{background:var(--deep);color:#fff;text-align:left;padding:15px 16px;font-size:12.5px;font-weight:700;white-space:nowrap}
+tbody td{padding:15px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(201,162,39,.04)}
+.order-no{font-family:ui-monospace,monospace;font-size:12.5px;color:var(--gold-d);font-weight:700}
+.cust-name{font-weight:700;color:var(--deep)}
+.cust-sub{font-size:12px;color:var(--grey);display:block;margin-top:3px}
+.song-type{display:inline-block;background:rgba(201,162,39,.14);color:var(--gold-d);font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px;margin-bottom:5px}
+.song-plan{font-size:12.5px;color:#6a6257}
+.amount{font-size:17px;font-weight:900;color:var(--gold-d);white-space:nowrap}
+.status-pill{display:inline-block;padding:5px 13px;border-radius:12px;font-size:12px;font-weight:700;white-space:nowrap}
+.st-wait{background:rgba(201,162,39,.15);color:var(--gold-d)}
+.st-doing{background:rgba(52,120,200,.14);color:#2c6aa8}
+.st-done{background:rgba(74,138,92,.15);color:#3a7550}
+.st-cancel{background:rgba(150,150,150,.16);color:#787878}
+.row-acts{display:flex;gap:6px;flex-wrap:wrap}
+.mini{padding:6px 11px;border-radius:4px;font-size:12px;font-weight:600;border:1px solid var(--line);color:#6a6257;background:#fff;transition:.22s;white-space:nowrap}
+.mini:hover{border-color:var(--gold);color:var(--gold-d)}
+.mini.del:hover{border-color:#c0392b;color:#c0392b}
+.empty{padding:80px 30px;text-align:center;color:var(--grey)}
+.empty span{font-size:52px;display:block;margin-bottom:18px;opacity:.4}
+.empty b{display:block;font-size:16px;color:var(--deep);margin-bottom:10px}
+.detail-row td{background:var(--warm);padding:0 !important}
+.detail-inner{padding:24px 28px;font-size:13px;color:#5a5450;line-height:2}
+.detail-inner b{color:var(--deep)}
+.detail-block{background:#fff;border:1px solid var(--line);border-radius:5px;padding:16px 18px;margin-top:12px}
+.detail-block h4{font-size:13px;color:var(--gold-d);margin-bottom:9px;font-weight:700}
+.lyrics-box{white-space:pre-wrap;font-size:13px;line-height:2;color:#4a4438}
+.foot-note{margin-top:26px;padding-top:22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--grey);line-height:2}
+.foot-note code{background:rgba(201,162,39,.13);padding:2px 7px;border-radius:3px;color:var(--gold-d)}
+@media (max-width:900px){
+  .topbar{padding:14px 4vw;height:auto;flex-direction:column;align-items:stretch;gap:12px}
+  .wrap{padding:24px 4vw 60px}
+  .table-card{overflow-x:auto}
+  table{min-width:1000px}
+}
+</style>
+</head>
+<body>
+
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <div class="login-mark">♪</div>
+    <h1>订单后台</h1>
+    <p>阿奇音符 · AI 定制歌曲</p>
+    <input type="password" id="pwd" placeholder="请输入管理密码">
+    <button id="loginBtn">进 入 后 台</button>
+    <div class="login-err" id="loginErr"></div>
+    <div class="login-tip">
+      <b>初始密码</b>：<code>music2026</code><br>
+      修改：打开 <code>admin.html</code>，找到 <code>PASSWORD</code> 改掉。<br>
+      <span style="color:#a89880">订单数据存在本机浏览器，换设备或清缓存会看不到，重要订单请导出备份。</span>
+    </div>
+  </div>
+</div>
+
+<div class="admin" id="admin">
+  <div class="topbar">
+    <div class="tb-left">
+      <div class="tb-mark">♪</div>
+      <div><b>订单后台</b><i>阿奇音符 · AI 定制歌曲</i></div>
+    </div>
+    <div class="tb-right">
+      <button class="tb-btn" id="toSite">返回网站</button>
+      <button class="tb-btn" id="demoBtn">生成测试单</button>
+      <button class="tb-btn gold" id="exportBtn">导出 Excel</button>
+      <button class="tb-btn" id="logoutBtn">退出</button>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="stats" id="stats"></div>
+    <div class="toolbar">
+      <input type="text" class="search" id="searchInput" placeholder="搜索订单号 / 客户 / 电话 / 类型…">
+      <select id="statusFilter">
+        <option value="">全部状态</option>
+        <option value="待跟进">待跟进</option>
+        <option value="制作中">制作中</option>
+        <option value="已交付">已交付</option>
+        <option value="已取消">已取消</option>
+      </select>
+      <select id="typeFilter"><option value="">全部类型</option></select>
+      <div class="spacer"></div>
+      <button class="tbtn ghost" id="refreshBtn">刷新</button>
+      <button class="tbtn ghost" id="clearBtn">清空全部</button>
+    </div>
+    <div class="table-card">
+      <table>
+        <thead><tr>
+          <th>订单号</th><th>下单时间</th><th>客户</th><th>歌曲需求</th><th>金额</th><th>状态</th><th>操作</th>
+        </tr></thead>
+        <tbody id="orderBody"></tbody>
+      </table>
+      <div class="empty" id="emptyState">
+        <span>♪</span><b>还没有订单</b>
+        <p>客户在下单页提交后，会显示在这里<br>也可以点右上角「生成测试单」看看效果</p>
+      </div>
+    </div>
+    <div class="foot-note">
+      <b>使用说明</b><br>
+      · 订单数据存在本机浏览器，换设备或清缓存会看不到，重要订单请导出备份。<br>
+      · 点「导出 Excel」下载 CSV，可直接用 Excel / WPS 打开。<br>
+      · 状态流转：待跟进 → 制作中 → 已交付。<br>
+      · 点「详情」可以看到客户填的完整需求（想说的话、故事、风格偏好）。<br>
+      · 修改密码：编辑 <code>admin.html</code>，找到 <code>var PASSWORD = 'music2026';</code>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var PASSWORD='music2026', ORDER_KEY='music_orders_v1', AUTH_KEY='music_admin_auth';
+  function $(s){ return document.querySelector(s); }
+  function money(n){ return '¥'+Number(n).toLocaleString('zh-CN'); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function load(k,d){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } }
+  function save(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+  var orders=load(ORDER_KEY,[]), expanded={};
+
+  function doLogin(){
+    if($('#pwd').value.trim()===PASSWORD){ sessionStorage.setItem(AUTH_KEY,'1'); showAdmin(); $('#loginErr').textContent=''; }
+    else { $('#loginErr').textContent='密码不对，请重新输入'; $('#pwd').value=''; }
+  }
+  $('#loginBtn').addEventListener('click',doLogin);
+  $('#pwd').addEventListener('keydown',function(e){ if(e.key==='Enter') doLogin(); });
+  function showAdmin(){ $('#loginWrap').style.display='none'; $('#admin').classList.add('on'); render(); }
+  if(sessionStorage.getItem(AUTH_KEY)==='1') showAdmin();
+  $('#logoutBtn').addEventListener('click',function(){ sessionStorage.removeItem(AUTH_KEY); location.reload(); });
+  $('#toSite').addEventListener('click',function(){ location.href='index.html'; });
+  function ymd(d){ var p=function(n){ return n<10?'0'+n:n; }; return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); }
+
+  function renderStats(){
+    var all=orders.length;
+    var valid=orders.filter(function(o){ return o.status!=='已取消'; });
+    var total=valid.reduce(function(s,o){ return s+(o.total||0); },0);
+    var today=valid.filter(function(o){ return o.time&&ymd(new Date(o.time))===ymd(new Date()); });
+    var todaySum=today.reduce(function(s,o){ return s+(o.total||0); },0);
+    var pending=orders.filter(function(o){ return o.status==='待跟进'||o.status==='制作中'; }).length;
+    function card(l,v,suf,small){ return '<div class="stat"><i>'+l+'</i><b>'+v+(suf||'')+'</b><small>'+small+'</small></div>'; }
+    $('#stats').innerHTML = card('订单总数',all,'<em>单</em>','含全部状态')+
+      card('总金额',money(total),'','不含已取消')+
+      card('今日订单',today.length,'<em>单</em>',money(todaySum))+
+      card('待处理',pending,'<em>单</em>','待跟进 + 制作中');
+  }
+  function getFiltered(){
+    var kw=$('#searchInput').value.trim().toLowerCase(), st=$('#statusFilter').value, tp=$('#typeFilter').value;
+    return orders.filter(function(o){
+      if(st&&o.status!==st) return false;
+      if(tp&&o.songType!==tp) return false;
+      if(kw){ var blob=[o.no,o.name,o.phone,o.songType,o.plan,o.scene,o.toWhom].join(' ').toLowerCase();
+        if(blob.indexOf(kw)===-1) return false; }
+      return true;
+    });
+  }
+  function fillTypeFilter(){
+    var t={}; orders.forEach(function(o){ if(o.songType) t[o.songType]=1; });
+    var sel=$('#typeFilter'), cur=sel.value;
+    sel.innerHTML='<option value="">全部类型</option>'+Object.keys(t).map(function(x){
+      return '<option value="'+esc(x)+'">'+esc(x)+'</option>'; }).join('');
+    sel.value=cur;
+  }
+  var SC={'待跟进':'st-wait','制作中':'st-doing','已交付':'st-done','已取消':'st-cancel'};
+  function render(){
+    fillTypeFilter(); renderStats();
+    var list=getFiltered(), body=$('#orderBody');
+    if(!list.length){ body.innerHTML=''; $('#emptyState').style.display='block'; return; }
+    $('#emptyState').style.display='none';
+    body.innerHTML=list.map(function(o){
+      var idx=orders.indexOf(o);
+      var row='<tr><td><span class="order-no">'+esc(o.no)+'</span></td>'+
+        '<td style="white-space:nowrap;font-size:12.5px;color:#8a8070">'+esc(o.timeText||'')+'</td>'+
+        '<td><span class="cust-name">'+esc(o.name)+'</span><span class="cust-sub">'+esc(o.phone)+'</span>'+
+          (o.wx?'<span class="cust-sub">微信：'+esc(o.wx)+'</span>':'')+'</td>'+
+        '<td>'+(o.songType?'<span class="song-type">'+esc(o.songType)+'</span><br>':'')+
+          '<span class="song-plan">'+esc(o.plan||(o.items&&o.items[0]?o.items[0].name:'—'))+'</span></td>'+
+        '<td><span class="amount">'+money(o.total)+'</span></td>'+
+        '<td><span class="status-pill '+(SC[o.status]||'st-wait')+'">'+esc(o.status)+'</span></td>'+
+        '<td><div class="row-acts">'+
+          '<button class="mini" data-act="detail" data-i="'+idx+'">详情</button>'+
+          '<button class="mini" data-act="next" data-i="'+idx+'">下一状态</button>'+
+          '<button class="mini del" data-act="del" data-i="'+idx+'">删除</button>'+
+        '</div></td></tr>';
+      if(expanded[o.no]){
+        var det='<tr class="detail-row"><td colspan="7"><div class="detail-inner"><b>订单详情 · '+esc(o.no)+'</b>';
+        if(o.songType){
+          det+='<div class="detail-block"><h4>定制需求</h4>'+
+            '<div>歌曲类型：<b>'+esc(o.songType)+'</b></div>'+
+            '<div>版本：<b>'+esc(o.plan||'')+'</b></div>'+
+            '<div>送给：<b>'+esc(o.toWhom||'')+'</b>　来自：<b>'+esc(o.fromWhom||'')+'</b></div>'+
+            '<div>场合：'+esc(o.scene||'')+'</div>'+
+            '<div>风格偏好：'+esc(o.style||'不限')+'　'+(o.rush?'<b style="color:#c0392b">加急</b>':'')+'</div></div>';
+          det+='<div class="detail-block"><h4>客户想说的话（写词素材）</h4><div class="lyrics-box">'+esc(o.words||'')+'</div></div>';
+          if(o.story) det+='<div class="detail-block"><h4>补充故事</h4><div class="lyrics-box">'+esc(o.story)+'</div></div>';
+        } else if(o.items){
+          det+='<div class="detail-block"><h4>订购内容</h4>'+
+            o.items.map(function(i){ return esc(i.name)+'　'+money(i.price)+' × '+i.qty+' = '+money(i.sum); }).join('<br>')+
+            (o.note?'<div style="margin-top:10px">备注：'+esc(o.note)+'</div>':'')+'</div>';
+        }
+        det+='<div style="margin-top:14px">联系方式：<b>'+esc(o.phone)+'</b>'+(o.wx?'　微信：'+esc(o.wx):'')+'</div></div></td></tr>';
+        row+=det;
+      }
+      return row;
+    }).join('');
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-act]'); if(!b) return;
+    var i=parseInt(b.getAttribute('data-i'),10), act=b.getAttribute('data-act');
+    var o=orders[i]; if(!o) return;
+    if(act==='detail'){ expanded[o.no]=!expanded[o.no]; render(); }
+    else if(act==='next'){
+      var flow=['待跟进','制作中','已交付'], p=flow.indexOf(o.status);
+      o.status=(p===-1||p===flow.length-1)?'待跟进':flow[p+1];
+      save(ORDER_KEY,orders); render();
+    } else if(act==='del'){
+      if(confirm('确定删除订单 '+o.no+'？不可恢复。')){ orders.splice(i,1); save(ORDER_KEY,orders); render(); }
+    }
+  });
+  ['#searchInput','#statusFilter','#typeFilter'].forEach(function(s){
+    $(s).addEventListener('input',render); $(s).addEventListener('change',render);
+  });
+  $('#refreshBtn').addEventListener('click',function(){ orders=load(ORDER_KEY,[]); render(); });
+  $('#clearBtn').addEventListener('click',function(){
+    if(!orders.length) return;
+    if(confirm('确定清空全部 '+orders.length+' 条订单？\n\n建议先导出备份。')){ orders=[]; save(ORDER_KEY,orders); render(); }
+  });
+  $('#exportBtn').addEventListener('click',function(){
+    if(!orders.length){ alert('还没有订单可导出'); return; }
+    var rows=[['订单号','下单时间','客户','电话','微信','歌曲类型','版本','送给谁','场合','想说的话','补充故事','风格','加急','金额','状态']];
+    orders.forEach(function(o){
+      rows.push([o.no,o.timeText||'',o.name,o.phone,o.wx||'',o.songType||'',
+        o.plan||(o.items&&o.items[0]?o.items[0].name:''),o.toWhom||'',o.scene||'',
+        o.words||'',o.story||'',o.style||'',o.rush||'',o.total,o.status]);
+    });
+    var csv=rows.map(function(r){ return r.map(function(c){ return '"'+String(c==null?'':c).replace(/"/g,'""')+'"'; }).join(','); }).join('\r\n');
+    var blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+    var url=URL.createObjectURL(blob), a=document.createElement('a');
+    a.href=url; a.download='阿奇音符订单_'+ymd(new Date())+'.csv';
+    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  });
+  $('#demoBtn').addEventListener('click',function(){
+    var types=['生日歌','表白歌','道谢歌','毕业歌','婚礼歌'], plans=['基础版','标准版','精品版','加急版'];
+    var priceMap={'基础版':20,'标准版':50,'精品版':100,'加急版':150};
+    var names=['张女士','李先生','王同学','刘小姐','陈先生'];
+    var phones=['13800001111','13900002222','15800003333','18600004444','17700005555'];
+    var scenes=['妈妈50岁生日，想感谢她这些年的付出','和女朋友在一起三周年','想谢谢帮过我的朋友','大学毕业了，纪念四年同窗','下个月结婚，想要一首属于我们的歌'];
+    var words='谢谢你一直在我身边。\n很多话平时说不出口，想借这首歌告诉你。\n希望你开心，希望我们一直这样走下去。';
+    var n=Math.floor(Math.random()*names.length), t=types[Math.floor(Math.random()*types.length)];
+    var pl=plans[Math.floor(Math.random()*plans.length)];
+    var now=new Date(), p=function(x){ return x<10?'0'+x:''+x; };
+    orders.unshift({ no:'AQ'+now.getFullYear()+p(now.getMonth()+1)+p(now.getDate())+p(now.getHours())+p(now.getMinutes())+p(now.getSeconds()),
+      type:'歌曲定制', time:now.toISOString(), timeText:ymd(now)+' '+p(now.getHours())+':'+p(now.getMinutes()),
+      songType:t, plan:pl, toWhom:'妈妈', fromWhom:names[n], scene:scenes[Math.floor(Math.random()*scenes.length)],
+      words:words, story:'', style:'流行', rush:'', name:names[n], phone:phones[n], wx:'', total:priceMap[pl], status:'待跟进' });
+    save(ORDER_KEY,orders); render();
+  });
+  window.addEventListener('focus',function(){ orders=load(ORDER_KEY,[]); if($('#admin').classList.contains('on')) render(); });
+})();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"f2489ebe01314da28c23ab168a907101","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
+
+
